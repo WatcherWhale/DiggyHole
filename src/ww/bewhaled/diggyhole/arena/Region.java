@@ -5,22 +5,32 @@ import com.sk89q.worldedit.math.BlockVector3;
 public class Region
 {
     BlockVector3 max,min;
-    int height, width;
+    int height, width, length;
 
     public Region(com.sk89q.worldedit.regions.Region region)
     {
+        this.length = region.getLength();
         this.height = region.getHeight();
         this.width = region.getWidth();
         this.max = region.getMaximumPoint();
         this.min = region.getMinimumPoint();
     }
 
-    public Region(BlockVector3 min,BlockVector3 max,int width, int height)
+    public Region(BlockVector3 min, BlockVector3 max, int width, int height, int length)
     {
+        this.length = length;
         this.height = height;
         this.width = width;
         this.max = max;
         this.min = min;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 
     public BlockVector3 getMax() {
