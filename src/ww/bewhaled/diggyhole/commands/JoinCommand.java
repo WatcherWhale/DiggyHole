@@ -6,10 +6,7 @@ import ww.bewhaled.diggyhole.arena.Arena;
 
 public class JoinCommand implements ICommand
 {
-    Main plugin;
-
-    final String name = "join";
-    final String description = "Join an arena.";
+    private Main plugin;
 
     public JoinCommand(Main pl)
     {
@@ -27,11 +24,11 @@ public class JoinCommand implements ICommand
 
     @Override
     public String getName() {
-        return name;
+        return "join";
     }
 
     @Override
     public String getDescription() {
-        return description;
+        return "Join an arena.";
     }
 }

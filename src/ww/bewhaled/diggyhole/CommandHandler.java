@@ -27,9 +27,9 @@ public class CommandHandler implements CommandExecutor
         {
             Player player = (Player)sender;
 
-            for (ICommand comm : commands)
+            for (ICommand comm : this.commands)
             {
-                if(comm.getName().toLowerCase() == args[0].toLowerCase()) return comm.execute(player,args);
+                if(comm.getName().toLowerCase().equals(args[0].toLowerCase())) return comm.execute(player,args);
             }
 
 

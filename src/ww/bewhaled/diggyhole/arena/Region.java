@@ -9,7 +9,7 @@ public class Region
     int height, width, length;
     World world;
 
-    public Region(com.sk89q.worldedit.regions.Region region)
+    public Region(com.sk89q.worldedit.regions.Region region, World world)
     {
         this.length = region.getLength();
         this.height = region.getHeight();
@@ -17,7 +17,7 @@ public class Region
         this.max = region.getMaximumPoint();
         this.min = region.getMinimumPoint();
 
-        this.world = (World) region.getWorld();
+        this.world =  world;
     }
 
     public Region(World world, BlockVector3 min, BlockVector3 max, int width, int height, int length)

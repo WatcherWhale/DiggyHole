@@ -10,10 +10,7 @@ import ww.bewhaled.diggyhole.arena.Arena;
 
 public class CreateCommand implements ICommand
 {
-    Main plugin;
-
-    final String name = "create";
-    final String description = "Create a Diggy Hole Arena";
+    private Main plugin;
 
     public CreateCommand(Main pl)
     {
@@ -29,7 +26,7 @@ public class CreateCommand implements ICommand
         {
             Region region = ses.getSelection(ses.getSelectionWorld());
 
-            Arena ar = new Arena(this.plugin,args[1],new ww.bewhaled.diggyhole.arena.Region(region));
+            Arena ar = new Arena(this.plugin,args[1],new ww.bewhaled.diggyhole.arena.Region(region,player.getWorld()));
 
             this.plugin.getArenas().AddArena(ar);
         }
@@ -43,11 +40,11 @@ public class CreateCommand implements ICommand
 
     @Override
     public String getName() {
-        return this.name;
+        return "create";
     }
 
     @Override
     public String getDescription() {
-        return this.description;
+        return "Create a Diggy Hole Arena.";
     }
 }

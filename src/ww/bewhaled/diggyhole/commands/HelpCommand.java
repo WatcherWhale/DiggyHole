@@ -11,9 +11,6 @@ public class HelpCommand implements ICommand
     Main plugin;
     ArrayList<ICommand> commands;
 
-    final String name = "Help";
-    final String description = "Get a list of commands.";
-
     public HelpCommand(Main pl, ArrayList<ICommand> commands)
     {
         this.plugin = pl;
@@ -26,8 +23,8 @@ public class HelpCommand implements ICommand
         player.sendMessage("Diggy Hole");
         for(ICommand command : commands)
         {
-            player.sendMessage(ChatColor.GREEN + "/dh" + command.getName()
-                    + ChatColor.WHITE + ": " + command.getDescription());
+            player.sendMessage(ChatColor.GREEN + "/dh " + command.getName()
+                    + ChatColor.WHITE + " " + command.getDescription());
         }
 
         return true;
@@ -35,11 +32,11 @@ public class HelpCommand implements ICommand
 
     public String getName()
     {
-        return name;
+        return "help";
     }
 
     public String getDescription()
     {
-        return description;
+        return "Get a list of commands.";
     }
 }

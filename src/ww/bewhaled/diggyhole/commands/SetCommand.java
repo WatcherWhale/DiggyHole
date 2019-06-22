@@ -9,9 +9,6 @@ public class SetCommand implements ICommand
 {
     private Main plugin;
 
-    private final String name = "set";
-    private final String description = "Set a special location.";
-
     public SetCommand(Main pl)
     {
         this.plugin = pl;
@@ -55,11 +52,11 @@ public class SetCommand implements ICommand
 
     @Override
     public String getName() {
-        return name;
+        return "set";
     }
 
     @Override
     public String getDescription() {
-        return description;
+        return "Set a special location.";
     }
 }
