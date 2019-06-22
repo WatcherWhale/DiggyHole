@@ -18,8 +18,12 @@ public class Main extends JavaPlugin
         //Load all configs
         this.config = new ConfigHandler(this);
 
+        //Register the commands
         this.getCommand("dh").setExecutor(new CommandHandler(this));
         this.getCommand("diggyhole").setExecutor(new CommandHandler(this));
+
+        //Register the events
+        Bukkit.getPluginManager().registerEvents(new EventHandler(this),this);
     }
 
     @Override
