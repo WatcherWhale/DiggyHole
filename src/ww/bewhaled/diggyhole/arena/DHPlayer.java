@@ -8,6 +8,12 @@ public class DHPlayer
     private int points;
     private String arena;
 
+    public DHPlayer(Player player, String arena)
+    {
+        this.player = player;
+        this.arena = arena;
+        this.points = 0;
+    }
 
     public Player getPlayer() {
         return player;

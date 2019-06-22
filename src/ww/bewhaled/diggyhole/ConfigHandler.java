@@ -1,8 +1,10 @@
 package ww.bewhaled.diggyhole;
 
-import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.YamlConfiguration;
+import ww.bewhaled.diggyhole.arena.Arena;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class ConfigHandler
 {
@@ -54,5 +56,63 @@ public class ConfigHandler
         {
             //e.printStackTrace();
         }
+    }
+
+    public void SaveArena(Arena ar)
+    {
+        try
+        {
+            File arenaDir = new File(this.plugin.getDataFolder() + "/arenas");
+            if(!arenaDir.exists()) arenaDir.mkdir();
+
+            File newConfig = new File(this.plugin.getDataFolder() + "/" + ar.getName() + ".yml");
+
+            if(!newConfig.exists())
+            {
+                newConfig.createNewFile();
+            }
+
+            YamlConfiguration conf  = new YamlConfiguration();
+
+            conf.set("name",ar.getName());
+            conf.set("region",ar.getRegion());
+            conf.set("lobby",ar.getLobby());
+            conf.set("arena",ar.getArena());
+
+            conf.save(newConfig);
+
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public YamlConfiguration[] GetArenaConfigs()
+    {
+        try
+        {
+            File arenaDir = new File(this.plugin.getDataFolder() + "/arenas");
+            if (!arenaDir.exists()) arenaDir.mkdir();
+
+            ArrayList<YamlConfiguration> arenas = new ArrayList<>();
+
+            for(File conf : arenaDir.listFiles())
+            {
+                YamlConfiguration config = new YamlConfiguration();
+                config.load(conf);
+
+                arenas.add(config);
+            }
+
+            return arenas.toArray(new YamlConfiguration[]{});
+
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return new YamlConfiguration[]{};
     }
 }

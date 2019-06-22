@@ -6,6 +6,7 @@ import com.sk89q.worldedit.regions.Region;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import ww.bewhaled.diggyhole.Main;
+import ww.bewhaled.diggyhole.arena.Arena;
 
 public class CreateCommand implements ICommand
 {
@@ -28,7 +29,9 @@ public class CreateCommand implements ICommand
         {
             Region region = ses.getSelection(ses.getSelectionWorld());
 
-            //TODO: Save region
+            Arena ar = new Arena(this.plugin,args[1],new ww.bewhaled.diggyhole.arena.Region(region));
+
+            this.plugin.getArenas().AddArena(ar);
         }
         catch (IncompleteRegionException e)
         {
