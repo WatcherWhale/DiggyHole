@@ -1,0 +1,11 @@
+name: Diggy Hole
+version: 1.0
+author: WatcherWhale
+main: ww.bewhaled.diggyhole.Main
+api-version: 1.14.2
+depend: WorldEdit
+
+commands:
+  dh:
+    description: Diggyhole commands
+    usage: /dh <command>
