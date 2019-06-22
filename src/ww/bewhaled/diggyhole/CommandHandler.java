@@ -2,10 +2,7 @@ package ww.bewhaled.diggyhole;
 
 import org.bukkit.entity.Player;
 import org.bukkit.command.*;
-import ww.bewhaled.diggyhole.commands.CreateCommand;
-import ww.bewhaled.diggyhole.commands.HelpCommand;
-import ww.bewhaled.diggyhole.commands.ICommand;
-import ww.bewhaled.diggyhole.commands.JoinCommand;
+import ww.bewhaled.diggyhole.commands.*;
 
 import java.util.ArrayList;
 
@@ -47,6 +44,7 @@ public class CommandHandler implements CommandExecutor
         this.commands.add(new HelpCommand(this.plugin,this.commands));
         this.commands.add(new CreateCommand(this.plugin));
         this.commands.add(new JoinCommand(this.plugin));
+        this.commands.add(new SetCommand(this.plugin));
     }
 
 }
