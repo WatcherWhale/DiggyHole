@@ -12,12 +12,19 @@ public class Main extends JavaPlugin
     public void onEnable()
     {
         this.we = (WorldEditPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
-        this.getCommand("dh").setExecutor(new CommandHandler(this.we));
+
+        this.getCommand("dh").setExecutor(new CommandHandler(this));
+        this.getCommand("diggyhole").setExecutor(new CommandHandler(this));
     }
 
     @Override
     public void onDisable()
     {
 
+    }
+
+    public WorldEditPlugin getWorldEdit()
+    {
+        return  this.we;
     }
 }

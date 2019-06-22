@@ -1,16 +1,24 @@
 package ww.bewhaled.diggyhole;
 
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.command.*;
+import ww.bewhaled.diggyhole.commands.CreateCommand;
+import ww.bewhaled.diggyhole.commands.HelpCommand;
+import ww.bewhaled.diggyhole.commands.ICommand;
+
+import java.util.ArrayList;
 
 public class CommandHandler implements CommandExecutor
 {
-    WorldEditPlugin we;
+    Main plugin;
+    ArrayList<ICommand> commands;
 
-    public CommandHandler(WorldEditPlugin we)
+    public CommandHandler(Main pl)
     {
-        this.we = we;
+        this.plugin = pl;
+        this.commands = new ArrayList<>();
+
+        InitCommands();
     }
 
     @Override
@@ -21,12 +29,22 @@ public class CommandHandler implements CommandExecutor
         {
             Player player = (Player)sender;
 
+            for (ICommand comm : commands)
+            {
+                if(comm.getName().toLowerCase() == args[0].toLowerCase()) return comm.execute(player,args);
+            }
 
 
-
-            return true;
+            return this.commands.get(0).execute(player,args);
         }
 
         return false;
     }
+
+    public void InitCommands()
+    {
+        this.commands.add(new HelpCommand(this.plugin,this.commands));
+        this.commands.add(new CreateCommand(this.plugin));
+    }
+
 }
