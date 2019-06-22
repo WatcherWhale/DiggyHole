@@ -1,11 +1,13 @@
 package ww.bewhaled.diggyhole.arena;
 
 import com.sk89q.worldedit.math.BlockVector3;
+import org.bukkit.World;
 
 public class Region
 {
     BlockVector3 max,min;
     int height, width, length;
+    World world;
 
     public Region(com.sk89q.worldedit.regions.Region region)
     {
@@ -14,15 +16,18 @@ public class Region
         this.width = region.getWidth();
         this.max = region.getMaximumPoint();
         this.min = region.getMinimumPoint();
+
+        this.world = (World) region.getWorld();
     }
 
-    public Region(BlockVector3 min, BlockVector3 max, int width, int height, int length)
+    public Region(World world, BlockVector3 min, BlockVector3 max, int width, int height, int length)
     {
         this.length = length;
         this.height = height;
         this.width = width;
         this.max = max;
         this.min = min;
+        this.world = world;
     }
 
     public int getLength() {
@@ -63,5 +68,10 @@ public class Region
 
     public void setWidth(int width) {
         this.width = width;
+    }
+
+    public int getVolume()
+    {
+        return this.width * this.height * this.length;
     }
 }

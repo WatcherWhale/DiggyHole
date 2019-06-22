@@ -5,3 +5,12 @@ MinPlayers: 2
 CountDown: 30
 # In ticks 500 = 25s
 EffectTime: 500
+
+chance:
+  diamond: 1.0
+  coal: 1.0
+  iron: 1.0
+  gold: 1.0
+  emerald: 1.0
+  redstone: 1.0
+  lapis: 1.0
