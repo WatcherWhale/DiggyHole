@@ -1,6 +1,7 @@
 package ww.bewhaled.diggyhole.commands;
 
-import com.sk89q.worldedit.
+import com.sk89q.worldedit.IncompleteRegionException;
+import com.sk89q.worldedit.LocalSession;
 import com.sk89q.worldedit.regions.Region;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -25,7 +26,6 @@ public class CreateCommand implements ICommand
 
         try
         {
-
             Region region = ses.getSelection(ses.getSelectionWorld());
 
             //TODO: Save region

@@ -1,0 +1,7 @@
+# Diggy Hole
+# Amount of players to start game
+MinPlayers: 2
+# In Seconds
+CountDown: 30
+# In ticks 500 = 25s
+EffectTime: 500
