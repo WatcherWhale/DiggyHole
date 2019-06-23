@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import ww.bewhaled.diggyhole.arena.Arena;
 import ww.bewhaled.diggyhole.arena.ArenaHandler;
+import ww.bewhaled.diggyhole.commands.CommandHandler;
 
 public class Main extends JavaPlugin
 {
@@ -43,7 +44,8 @@ public class Main extends JavaPlugin
     @Override
     public void onDisable()
     {
-        //Save all arenas just in case
+        this.config.SaveConfig();
+
         for(Arena ar : this.arenas.getArenas())
         {
             this.config.SaveArena(ar);

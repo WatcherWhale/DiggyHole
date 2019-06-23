@@ -1,5 +1,6 @@
 package ww.bewhaled.diggyhole;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import ww.bewhaled.diggyhole.arena.Arena;
 
@@ -26,11 +27,14 @@ public class ConfigHandler
 
                 //Create the file
                 this.file.createNewFile();
-                this.Copy(this.plugin.getResource("config.yml"), this.file);
-
+                this.plugin.getConfig().load(this.file);
+                this.SetDefaults();
+                this.SaveConfig();
             }
-
-            this.plugin.getConfig().load(this.file);
+            else
+            {
+                this.plugin.getConfig().load(this.file);
+            }
         }
         catch(Exception e)
         {
@@ -38,23 +42,32 @@ public class ConfigHandler
         }
     }
 
-    private void Copy(InputStream in, File file)
+    public void SetDefaults()
+    {
+        FileConfiguration config = this.plugin.getConfig();
+
+        config.set("MinPlayers",2);
+        config.set("Countdown",30);
+        config.set("EffectTime",500);
+
+        config.set("chance.diamond",1.0);
+        config.set("chance.coal",1.0);
+        config.set("chance.iron",1.0);
+        config.set("chance.gold",1.0);
+        config.set("chance.emerald",1.0);
+        config.set("chance.redstone",1.0);
+        config.set("chance.lapis",1.0);
+    }
+
+    public void SaveConfig()
     {
         try
         {
-            OutputStream out = new FileOutputStream(file);
-            byte[] buf = new byte[1024];
-            int len;
-            while ((len = in.read(buf)) > 0)
-            {
-                out.write(buf, 0, len);
-            }
-            out.close();
-            in.close();
+            this.plugin.getConfig().save(this.file);
         }
-        catch (Exception e)
+        catch (IOException e)
         {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -65,7 +78,7 @@ public class ConfigHandler
             File arenaDir = new File(this.plugin.getDataFolder() + "/arenas");
             if(!arenaDir.exists()) arenaDir.mkdir();
 
-            File newConfig = new File(this.plugin.getDataFolder() + "/" + ar.getName() + ".yml");
+            File newConfig = new File(arenaDir.getPath() + "/" + ar.getName() + ".yml");
 
             if(!newConfig.exists())
             {
