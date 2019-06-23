@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import ww.bewhaled.diggyhole.Util;
 
 import java.util.Collection;
@@ -75,6 +76,8 @@ class DHPlayerSave
 
     public void LoadSave(Player player)
     {
+        this.RemoveEffects(player);
+
         //Restore the player save state
         player.getInventory().setContents(this.inv.getContents());
         player.getInventory().setArmorContents(this.inv.getArmorContents());
@@ -83,5 +86,13 @@ class DHPlayerSave
         player.teleport(this.location);
         player.setGameMode(this.gameMode);
         player.addPotionEffects(this.effects);
+    }
+
+    public void RemoveEffects(Player player)
+    {
+        for(PotionEffect effect : player.getActivePotionEffects())
+        {
+            player.removePotionEffect(effect.getType());
+        }
     }
 }
