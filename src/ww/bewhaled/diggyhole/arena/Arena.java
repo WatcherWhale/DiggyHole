@@ -151,7 +151,7 @@ public class Arena
             Player player = dhp.getPlayer();
 
             this.PreparePlayer(player);
-            player.setItemOnCursor(pick);
+            player.getInventory().setItemInMainHand(pick);
 
             player.teleport(this.arena);
         }
