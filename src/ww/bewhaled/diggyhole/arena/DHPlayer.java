@@ -3,10 +3,8 @@ package ww.bewhaled.diggyhole.arena;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import ww.bewhaled.diggyhole.Util;
 
 import java.util.Collection;

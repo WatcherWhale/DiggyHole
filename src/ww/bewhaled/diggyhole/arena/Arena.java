@@ -97,6 +97,12 @@ public class Arena
     {
         this.BuildBlock();
 
+        for(DHPlayer dhp : this.players)
+        {
+            Player player = dhp.getPlayer();
+            player.teleport(this.arena);
+        }
+
         this.secondsLeft = this.plugin.getConfig().getInt("Countdown");
 
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
@@ -110,7 +116,7 @@ public class Arena
                     StopCountDown(true);
                     StartGame();
                 }
-                else
+                else if(secondsLeft%5 == 0 || secondsLeft <= 5)
                 {
                     Broadcast(ChatColor.GREEN + Integer.toString(secondsLeft) + "...");
                 }
@@ -152,7 +158,7 @@ public class Arena
             this.PreparePlayer(player);
             player.getInventory().setItemInMainHand(pick);
 
-            player.teleport(this.arena);
+            //player.teleport(this.arena);
         }
     }
 
