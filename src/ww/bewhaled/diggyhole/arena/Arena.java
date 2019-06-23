@@ -275,7 +275,7 @@ public class Arena
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0F, 20.0F);
         player.sendMessage(ChatColor.AQUA + "+1 Diamond!");
 
-        if(dhp.getPoints() == 5)
+        if(dhp.getPoints() == this.plugin.getConfig().getInt("WinPoints"))
         {
             FinishGame(player);
         }

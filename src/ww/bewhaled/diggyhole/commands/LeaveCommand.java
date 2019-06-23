@@ -1,6 +1,5 @@
 package ww.bewhaled.diggyhole.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import ww.bewhaled.diggyhole.Main;
 import ww.bewhaled.diggyhole.arena.Arena;
