@@ -29,9 +29,11 @@ public class CreateCommand implements ICommand
             Arena ar = new Arena(this.plugin,args[1],new ww.bewhaled.diggyhole.arena.Region(region,player.getWorld()));
 
             this.plugin.getArenas().AddArena(ar);
+            player.sendMessage(ChatColor.GREEN + "[Diggy Hole] "
+                        + ChatColor.WHITE + "Arena " + ar.getName() + " created!");
         }
         catch (IncompleteRegionException e) {
-            player.sendMessage(ChatColor.GREEN + "[Diggy Hole] " + ChatColor.DARK_RED + e.getMessage());
+            player.sendMessage(ChatColor.GREEN + "[Diggy Hole] " + ChatColor.RED + e.getMessage());
         }
     }
 
