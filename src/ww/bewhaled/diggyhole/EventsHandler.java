@@ -72,12 +72,10 @@ public class EventsHandler implements Listener
         if(mat == Material.DIAMOND_ORE)
         {
             ar.ScorePoint(player);
-            return false;
         }
         else if(mat == Material.COAL_ORE)
         {
             ar.Blind(player);
-            return false;
         }
         else if(mat == Material.EMERALD_ORE)
         {
@@ -101,7 +99,7 @@ public class EventsHandler implements Listener
         }
         else
         {
-            return true;
+            return false;
         }
 
         return true;
