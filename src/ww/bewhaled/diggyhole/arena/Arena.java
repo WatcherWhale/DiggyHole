@@ -12,6 +12,8 @@ import org.bukkit.scheduler.BukkitScheduler;
 import ww.bewhaled.diggyhole.Main;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Arena
@@ -24,7 +26,7 @@ public class Arena
     private Location lobby;
     private Location arena;
 
-    private ArrayList<DHPlayer> players;
+    private HashMap<String,DHPlayer> players;
 
     private boolean started = false;
 
@@ -34,7 +36,7 @@ public class Arena
     public Arena(Main pl, String name, Region region, Location lobby, Location arena)
     {
         this.plugin = pl;
-        this.players = new ArrayList<>();
+        this.players = new HashMap<>();
 
         this.name = name;
         this.region = region;
@@ -45,7 +47,7 @@ public class Arena
     public Arena(Main pl, String name, Region region)
     {
         this.plugin = pl;
-        this.players = new ArrayList<>();
+        this.players = new HashMap<>();
 
         this.name = name;
         this.region = region;
@@ -54,7 +56,7 @@ public class Arena
     public Arena(Main pl, YamlConfiguration config)
     {
         this.plugin = pl;
-        this.players = new ArrayList<>();
+        this.players = new HashMap<>();
 
         this.name = config.getString("name");
         this.lobby = (Location) config.get("lobby");
@@ -78,7 +80,7 @@ public class Arena
     public void PlayerJoined(Player player)
     {
         DHPlayer dhp = new DHPlayer(player,this.name);
-        players.add(dhp);
+        players.put(player.getName(),dhp);
 
         player.teleport(this.arena);
 
@@ -93,11 +95,22 @@ public class Arena
         }
     }
 
+    public void PlayerLeft(Player player)
+    {
+        DHPlayer dhp = players.get(player.getName());
+        dhp.RevertBack();
+
+        players.remove(player.getName());
+
+        player.sendMessage(ChatColor.GREEN + "[Diggy Hole]" +
+                ChatColor.WHITE + " You left the game!");
+    }
+
     public void StartCountDown()
     {
         this.BuildBlock();
 
-        for(DHPlayer dhp : this.players)
+        for(DHPlayer dhp : this.players.values())
         {
             Player player = dhp.getPlayer();
             player.teleport(this.arena);
@@ -139,7 +152,7 @@ public class Arena
 
     public void Broadcast(String message)
     {
-        for(DHPlayer player : players)
+        for(DHPlayer player : players.values())
         {
             player.getPlayer().sendMessage(message);
         }
@@ -151,7 +164,7 @@ public class Arena
 
         ItemStack pick = getPickaxe();
 
-        for(DHPlayer dhp : this.players)
+        for(DHPlayer dhp : this.players.values())
         {
             Player player = dhp.getPlayer();
 
@@ -236,7 +249,7 @@ public class Arena
 
     public void FinishGame(Player winner)
     {
-        for(DHPlayer player : this.players)
+        for(DHPlayer player : this.players.values())
         {
             if(player.getPlayer() != winner)
             {
@@ -330,12 +343,7 @@ public class Arena
 
     public DHPlayer FindPlayer(Player player)
     {
-        for(DHPlayer dhp : players)
-        {
-            if(dhp.getPlayer() == player) return dhp;
-        }
-
-        return null;
+        return this.players.get(player.getName());
     }
 
     public ItemStack getPickaxe()
@@ -366,8 +374,8 @@ public class Arena
         return region;
     }
 
-    public ArrayList<DHPlayer> getPlayers() {
-        return players;
+    public Collection<DHPlayer> getPlayers() {
+        return players.values();
     }
 
     public boolean isStarted() {
