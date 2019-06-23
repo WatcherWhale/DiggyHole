@@ -241,7 +241,7 @@ public class Arena
                 player.getPlayer().sendMessage(ChatColor.GOLD + "You won the game");
             }
 
-            player.getPlayer().performCommand("spawn");
+            player.RevertBack();
         }
 
         players.clear();

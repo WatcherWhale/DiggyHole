@@ -1,6 +1,13 @@
 package ww.bewhaled.diggyhole.arena;
 
+import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.potion.PotionEffect;
+
+import java.util.Collection;
 
 public class DHPlayer
 {
@@ -8,11 +15,21 @@ public class DHPlayer
     private int points;
     private String arena;
 
+    private DHPlayerSave saveState;
+
+
     public DHPlayer(Player player, String arena)
     {
         this.player = player;
         this.arena = arena;
         this.points = 0;
+
+        this.saveState = new DHPlayerSave(player);
+    }
+
+    public void RevertBack()
+    {
+        saveState.LoadSave(this.player);
     }
 
     public Player getPlayer() {
@@ -37,5 +54,33 @@ public class DHPlayer
 
     public void setArena(String arena) {
         this.arena = arena;
+    }
+}
+
+class DHPlayerSave
+{
+    private PlayerInventory inv;
+    private Collection<PotionEffect> effects;
+    private GameMode gameMode;
+    private Location location;
+
+    public DHPlayerSave(Player player)
+    {
+        this.inv = player.getInventory();
+        this.effects = player.getActivePotionEffects();
+        this.gameMode = player.getGameMode();
+        this.location = player.getLocation();
+    }
+
+    public void LoadSave(Player player)
+    {
+        //Restore the player save state
+        player.getInventory().setContents(this.inv.getContents());
+        player.getInventory().setArmorContents(this.inv.getArmorContents());
+        player.getInventory().setItemInOffHand(this.inv.getItemInOffHand());
+
+        player.teleport(this.location);
+        player.setGameMode(this.gameMode);
+        player.addPotionEffects(this.effects);
     }
 }
