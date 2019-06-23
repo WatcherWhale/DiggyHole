@@ -97,6 +97,10 @@ public class EventsHandler implements Listener
         {
             ar.Slow(player);
         }
+        else if(mat == Material.STONE)
+        {
+            //Count blocks in the future
+        }
         else
         {
             return false;
