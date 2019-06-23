@@ -40,6 +40,8 @@ public class SetCommand implements ICommand
                 player.sendMessage(ChatColor.GREEN + "[Diggy Hole]" +
                         ChatColor.RED + " This location is not recognized!");
             }
+
+            this.plugin.getConfigHandler().SaveArena(ar);
         }
         else
         {

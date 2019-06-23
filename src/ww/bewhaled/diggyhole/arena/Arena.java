@@ -1,6 +1,5 @@
 package ww.bewhaled.diggyhole.arena;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.*;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
