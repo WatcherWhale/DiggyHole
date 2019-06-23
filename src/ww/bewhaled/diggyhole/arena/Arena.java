@@ -97,7 +97,7 @@ public class Arena
     {
         this.BuildBlock();
 
-        secondsLeft = this.plugin.getConfig().getInt("CountDown");
+        this.secondsLeft = this.plugin.getConfig().getInt("Countdown");
 
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
         this.taskID = scheduler.scheduleSyncRepeatingTask(this.plugin, new Runnable() {
