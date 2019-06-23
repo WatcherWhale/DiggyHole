@@ -18,7 +18,7 @@ public class CreateCommand implements ICommand
     }
 
     @Override
-    public boolean execute(Player player, String[] args)
+    public void execute(Player player, String[] args)
     {
         LocalSession ses = this.plugin.getWorldEdit().getSession(player);
 
@@ -30,12 +30,15 @@ public class CreateCommand implements ICommand
 
             this.plugin.getArenas().AddArena(ar);
         }
-        catch (IncompleteRegionException e)
-        {
+        catch (IncompleteRegionException e) {
             player.sendMessage(ChatColor.GREEN + "[Diggy Hole] " + ChatColor.DARK_RED + e.getMessage());
         }
+    }
 
-        return true;
+    @Override
+    public boolean hasPermission(Player player)
+    {
+        return player.hasPermission(this.getPermission());
     }
 
     @Override
@@ -47,4 +50,11 @@ public class CreateCommand implements ICommand
     public String getDescription() {
         return "Create a Diggy Hole Arena.";
     }
+
+    @Override
+    public String getPermission() {
+        return "diggyhole.admin";
+    }
+
+
 }

@@ -1,8 +1,9 @@
-package ww.bewhaled.diggyhole;
+package ww.bewhaled.diggyhole.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.command.*;
-import ww.bewhaled.diggyhole.commands.*;
+import ww.bewhaled.diggyhole.Main;
 
 import java.util.ArrayList;
 
@@ -29,14 +30,17 @@ public class CommandHandler implements CommandExecutor
 
             for (ICommand comm : this.commands)
             {
-                if(comm.getName().toLowerCase().equals(args[0].toLowerCase())) return comm.execute(player,args);
+                if(comm.getName().toLowerCase().equals(args[0].toLowerCase()))
+                {
+                    if(comm.hasPermission(player)) comm.execute(player,args);
+                    else player.sendMessage(ChatColor.GREEN + "[Diggy Hole] "
+                            + ChatColor.RED + "You do not have access to that command!");
+                }
             }
 
-
-            return this.commands.get(0).execute(player,args);
         }
 
-        return false;
+        return true;
     }
 
     public void InitCommands()

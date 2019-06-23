@@ -7,11 +7,11 @@ public interface ICommand
 {
     Main plugin = null;
 
-    String name = "";
-    String description = "";
+    void execute(Player player, String[] args);
 
-    boolean execute(Player player, String[] args);
+    boolean hasPermission(Player player);
 
     String getName();
     String getDescription();
+    String getPermission();
 }

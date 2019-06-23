@@ -15,7 +15,7 @@ public class SetCommand implements ICommand
     }
 
     @Override
-    public boolean execute(Player player, String[] args)
+    public void execute(Player player, String[] args)
     {
         Arena ar = this.plugin.getArenas().FindArena(args[1]);
         if(ar != null)
@@ -44,10 +44,14 @@ public class SetCommand implements ICommand
         else
         {
             player.sendMessage(ChatColor.GREEN + "[Diggy Hole]" +
-                    ChatColor.RED + " The arena " + args[1] + " doesn't exist!");
+                    ChatColor.RED + " The arena " + args[1] + " does not exist!");
         }
+    }
 
-        return true;
+    @Override
+    public boolean hasPermission(Player player)
+    {
+        return player.hasPermission(this.getPermission());
     }
 
     @Override
@@ -58,5 +62,10 @@ public class SetCommand implements ICommand
     @Override
     public String getDescription() {
         return "Set a special location.";
+    }
+
+    @Override
+    public String getPermission() {
+        return "diggyhole.admin";
     }
 }
