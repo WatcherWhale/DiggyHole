@@ -65,6 +65,9 @@ public class Arena
 
         player.teleport(this.arena);
 
+        player.sendMessage(ChatColor.GREEN + "[Diggy Hole]" +
+                ChatColor.WHITE + " Joined " + this.name + "!");
+
         if(this.players.size() == this.plugin.getConfig().getInt("MinPlayers"))
         {
             StartGame();
@@ -86,19 +89,19 @@ public class Arena
     private void BuildBlock()
     {
         Random rand = new Random();
-        for (int x = region.getMin().getX(); x < region.getMax().getX();x++)
+        for (int x = region.getMin()[0]; x < region.getMax()[0];x++)
         {
-            for (int z = region.getMin().getZ(); z < region.getMax().getZ();z++)
+            for (int z = region.getMin()[2]; z < region.getMax()[2];z++)
             {
-                for (int y = region.getMin().getY(); y < region.getMax().getY();y++)
+                for (int y = region.getMin()[1]; y < region.getMax()[1];y++)
                 {
                     //Set the top to grass blocks
-                    if(y == region.getMax().getY())
+                    if(y == region.getMax()[1])
                     {
                         this.region.world.getBlockAt(x,y,z).setType(Material.GRASS_BLOCK);
                     }
-                    else if(x == region.getMax().getX() || x == region.getMin().getX() ||
-                            z == region.getMax().getZ() || z == region.getMin().getZ())
+                    else if(x == region.getMax()[0] || x == region.getMin()[0] ||
+                            z == region.getMax()[2] || z == region.getMin()[2])
                     {
                         this.region.world.getBlockAt(x,y,z).setType(Material.STONE);
                     }

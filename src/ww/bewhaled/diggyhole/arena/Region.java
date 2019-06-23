@@ -5,7 +5,7 @@ import org.bukkit.World;
 
 public class Region
 {
-    BlockVector3 max,min;
+    int[] max,min;
     int height, width, length;
     World world;
 
@@ -14,13 +14,15 @@ public class Region
         this.length = region.getLength();
         this.height = region.getHeight();
         this.width = region.getWidth();
-        this.max = region.getMaximumPoint();
-        this.min = region.getMinimumPoint();
+        this.max = new int[]{region.getMaximumPoint().getBlockX(),
+                region.getMaximumPoint().getBlockY(),region.getMaximumPoint().getBlockZ()};
+        this.min = new int[]{region.getMinimumPoint().getBlockX(),
+                region.getMinimumPoint().getBlockY(),region.getMinimumPoint().getBlockZ()};
 
         this.world =  world;
     }
 
-    public Region(World world, BlockVector3 min, BlockVector3 max, int width, int height, int length)
+    public Region(World world, int[] min, int[] max, int width, int height, int length)
     {
         this.length = length;
         this.height = height;
@@ -38,19 +40,19 @@ public class Region
         this.length = length;
     }
 
-    public BlockVector3 getMax() {
+    public int[] getMax() {
         return max;
     }
 
-    public void setMax(BlockVector3 max) {
+    public void setMax(int[] max) {
         this.max = max;
     }
 
-    public BlockVector3 getMin() {
+    public int[] getMin() {
         return min;
     }
 
-    public void setMin(BlockVector3 min) {
+    public void setMin(int[] min) {
         this.min = min;
     }
 
