@@ -1,8 +1,6 @@
 package ww.bewhaled.diggyhole.arena;
 
-import com.sk89q.worldedit.math.BlockVector3;
 import org.bukkit.World;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 public class Region
 {

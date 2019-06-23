@@ -72,7 +72,7 @@ public class Arena
             minArr[i] = (int)min.get(i);
         }
 
-        this.region = new Region((World)config.get("region.world"),minArr,maxArr);
+        this.region = new Region(this.arena.getWorld(),minArr,maxArr);
     }
 
     public void PlayerJoined(Player player)
