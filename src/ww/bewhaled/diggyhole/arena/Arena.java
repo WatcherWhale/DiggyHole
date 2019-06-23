@@ -323,8 +323,8 @@ public class Arena
         ItemStack pick = new ItemStack(Material.DIAMOND_PICKAXE,1);
 
         ItemMeta meta = pick.getItemMeta();
-        meta.addEnchant(Enchantment.DIG_SPEED,1000,true);
-        meta.addEnchant(Enchantment.DURABILITY,1000,true);
+        meta.addEnchant(Enchantment.DIG_SPEED,1000,false);
+        meta.addEnchant(Enchantment.DURABILITY,1000,false);
         meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Fast Pickaxe");
 
         ArrayList<String> lore = new ArrayList<>();
