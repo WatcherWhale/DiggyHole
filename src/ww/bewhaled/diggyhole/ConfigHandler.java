@@ -91,6 +91,7 @@ public class ConfigHandler
 
             conf.set("region.max",ar.getRegion().getMax());
             conf.set("region.min",ar.getRegion().getMin());
+            conf.set("region.world",ar.getRegion().getWorld());
 
             conf.set("lobby",ar.getLobby());
             conf.set("arena",ar.getArena());
