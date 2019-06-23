@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
+import ww.bewhaled.diggyhole.Util;
 
 import java.util.Collection;
 
@@ -66,8 +67,8 @@ class DHPlayerSave
 
     public DHPlayerSave(Player player)
     {
-        this.inv = player.getInventory();
-        this.effects = player.getActivePotionEffects();
+        this.inv = (PlayerInventory) Util.Deepclone(player.getInventory());
+        this.effects = (Collection<PotionEffect>)Util.Deepclone(player.getActivePotionEffects());
         this.gameMode = player.getGameMode();
         this.location = player.getLocation();
     }
