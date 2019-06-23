@@ -297,11 +297,12 @@ public class Arena
     {
         for(PotionEffect effect : player.getActivePotionEffects())
         {
-            if(effect.getType() != PotionEffectType.NIGHT_VISION)
-            {
-                player.removePotionEffect(effect.getType());
-            }
+            player.removePotionEffect(effect.getType());
         }
+
+        PotionEffect effect = new PotionEffect(PotionEffectType.NIGHT_VISION,Integer.MAX_VALUE,
+                255,true,false);
+        player.addPotionEffect(effect);
     }
 
     public void FastMining(Player player)
