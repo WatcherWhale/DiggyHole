@@ -49,7 +49,7 @@ public class ConfigHandler
         config.set("MinPlayers",4);
         config.set("Countdown",15);
         config.set("EffectTime",500);
-        config.set("WInPoints",10);
+        config.set("WinPoints",10);
 
         config.set("chance.diamond",1.0);
         config.set("chance.coal",1.0);
