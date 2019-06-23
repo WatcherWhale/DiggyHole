@@ -27,6 +27,7 @@ public class Arena
     private Location arena;
 
     private HashMap<String,DHPlayer> players;
+    private ScoreBoardHandler scoreboard;
 
     private boolean started = false;
 
@@ -42,6 +43,8 @@ public class Arena
         this.region = region;
         this.lobby = lobby;
         this.arena = arena;
+
+        this.scoreboard = new ScoreBoardHandler(pl,this);
     }
 
     public Arena(Main pl, String name, Region region)
@@ -51,6 +54,8 @@ public class Arena
 
         this.name = name;
         this.region = region;
+
+        this.scoreboard = new ScoreBoardHandler(pl,this);
     }
 
     public Arena(Main pl, YamlConfiguration config)
@@ -75,12 +80,17 @@ public class Arena
         }
 
         this.region = new Region(this.arena.getWorld(),minArr,maxArr);
+
+        this.scoreboard = new ScoreBoardHandler(pl,this);
     }
 
     public void PlayerJoined(Player player)
     {
         DHPlayer dhp = new DHPlayer(player,this.name);
         players.put(player.getName(),dhp);
+
+        this.scoreboard.SetScoreBoard(player);
+        this.scoreboard.SetScore(player,dhp.getPoints());
 
         player.teleport(this.arena);
 
@@ -99,6 +109,8 @@ public class Arena
     {
         DHPlayer dhp = players.get(player.getName());
         dhp.RevertBack();
+
+        this.scoreboard.RemoveScoreBoard(player);
 
         players.remove(player.getName());
 
@@ -274,6 +286,8 @@ public class Arena
 
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0F, 20.0F);
         player.sendMessage(ChatColor.AQUA + "+1 Diamond!");
+
+        this.scoreboard.SetScore(player,dhp.getPoints());
 
         if(dhp.getPoints() == this.plugin.getConfig().getInt("WinPoints"))
         {
