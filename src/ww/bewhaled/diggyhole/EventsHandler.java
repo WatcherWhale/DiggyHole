@@ -34,6 +34,7 @@ public class EventsHandler implements Listener
             Arena ar = this.plugin.getArenas().FindArena(player);
 
             e.setDropItems(false);
+            e.setExpToDrop(0);
 
             if(!HandleBlockBreak(e.getBlock().getType(),ar, player))
             {
