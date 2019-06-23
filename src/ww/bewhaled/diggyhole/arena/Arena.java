@@ -1,13 +1,14 @@
 package ww.bewhaled.diggyhole.arena;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitScheduler;
 import ww.bewhaled.diggyhole.Main;
 
 import java.util.ArrayList;
@@ -26,6 +27,9 @@ public class Arena
     private ArrayList<DHPlayer> players;
 
     private boolean started = false;
+
+    private int taskID;
+    private int secondsLeft;
 
     public Arena(Main pl, String name, Region region, Location lobby, Location arena)
     {
@@ -68,9 +72,57 @@ public class Arena
         player.sendMessage(ChatColor.GREEN + "[Diggy Hole]" +
                 ChatColor.WHITE + " Joined " + this.name + "!");
 
+        this.PreparePlayer(player);
+
         if(this.players.size() == this.plugin.getConfig().getInt("MinPlayers"))
         {
-            StartGame();
+            this.StartCountDown();
+        }
+    }
+
+    public void StartCountDown()
+    {
+        this.BuildBlock();
+
+        secondsLeft = this.plugin.getConfig().getInt("CountDown");
+
+        BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+        this.taskID = scheduler.scheduleSyncRepeatingTask(this.plugin, new Runnable() {
+            @Override
+            public void run()
+            {
+                if(secondsLeft == 0)
+                {
+                    Broadcast(ChatColor.GOLD + "DIIIIGGG!!!");
+                    StopCountDown(true);
+                    StartGame();
+                }
+                else
+                {
+                    Broadcast(ChatColor.GREEN + Integer.toString(secondsLeft) + "...");
+                }
+
+                secondsLeft--;
+            }
+        },0L,20L);
+
+    }
+
+    public void StopCountDown(boolean safe)
+    {
+        if(!safe)
+        {
+            this.Broadcast(ChatColor.RED + "Countdown Cancelled!");
+        }
+
+        Bukkit.getServer().getScheduler().cancelTask(this.taskID);
+    }
+
+    public void Broadcast(String message)
+    {
+        for(DHPlayer player : players)
+        {
+            player.getPlayer().sendMessage(message);
         }
     }
 
@@ -78,11 +130,16 @@ public class Arena
     {
         started = true;
 
-        BuildBlock();
+        ItemStack pick = getPickaxe();
 
         for(DHPlayer dhp : this.players)
         {
-            dhp.getPlayer().teleport(this.arena);
+            Player player = dhp.getPlayer();
+
+            this.PreparePlayer(player);
+            player.setItemOnCursor(pick);
+
+            player.teleport(this.arena);
         }
     }
 
@@ -241,6 +298,16 @@ public class Arena
         player.addPotionEffect(effect);
     }
 
+    public void PreparePlayer(Player player)
+    {
+        player.setGameMode(GameMode.SURVIVAL);
+        player.getInventory().clear();
+
+        PotionEffect effect = new PotionEffect(PotionEffectType.NIGHT_VISION,Integer.MAX_VALUE,
+                255,true,false);
+        player.addPotionEffect(effect);
+    }
+
     public DHPlayer FindPlayer(Player player)
     {
         for(DHPlayer dhp : players)
@@ -249,6 +316,26 @@ public class Arena
         }
 
         return null;
+    }
+
+    public ItemStack getPickaxe()
+    {
+        ItemStack pick = new ItemStack(Material.DIAMOND_PICKAXE,1);
+
+        ItemMeta meta = pick.getItemMeta();
+        meta.addEnchant(Enchantment.DIG_SPEED,1000,true);
+        meta.addEnchant(Enchantment.DURABILITY,1000,true);
+        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Fast Pickaxe");
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(ChatColor.WHITE + "Find them diamonds!");
+        lore.add(ChatColor.GREEN + "Stop looking start digging!");
+
+        meta.setLore(lore);
+
+        pick.setItemMeta(meta);
+
+        return pick;
     }
 
     public String getName() {
