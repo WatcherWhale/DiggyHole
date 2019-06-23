@@ -1,5 +1,6 @@
 package ww.bewhaled.diggyhole.arena;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.*;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
@@ -57,9 +58,22 @@ public class Arena
         this.players = new ArrayList<>();
 
         this.name = config.getString("name");
-        this.region = (Region) config.get("region");
         this.lobby = (Location) config.get("lobby");
         this.arena = (Location) config.get("arena");
+
+        ArrayList<Object> max = (ArrayList<Object>)config.get("region.max");
+        ArrayList<Object> min = (ArrayList<Object>)config.get("region.min");
+
+        int[] maxArr = new int[3];
+        int[] minArr = new int[3];
+
+        for(int i = 0; i < maxArr.length; i++)
+        {
+            maxArr[i] = (int)max.get(i);
+            minArr[i] = (int)min.get(i);
+        }
+
+        this.region = new Region((World)config.get("region.world"),minArr,maxArr);
     }
 
     public void PlayerJoined(Player player)

@@ -88,7 +88,10 @@ public class ConfigHandler
             YamlConfiguration conf  = new YamlConfiguration();
 
             conf.set("name",ar.getName());
-            conf.set("region",ar.getRegion());
+
+            conf.set("region.max",ar.getRegion().getMax());
+            conf.set("region.min",ar.getRegion().getMin());
+
             conf.set("lobby",ar.getLobby());
             conf.set("arena",ar.getArena());
 

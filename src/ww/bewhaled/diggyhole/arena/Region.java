@@ -2,6 +2,7 @@ package ww.bewhaled.diggyhole.arena;
 
 import com.sk89q.worldedit.math.BlockVector3;
 import org.bukkit.World;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 public class Region
 {
@@ -27,6 +28,16 @@ public class Region
         this.length = length;
         this.height = height;
         this.width = width;
+        this.max = max;
+        this.min = min;
+        this.world = world;
+    }
+
+    public Region(World world, int[] min, int[] max)
+    {
+        this.length = Math.abs(max[2] - min[2]);
+        this.height = Math.abs(max[1]- min[1]);
+        this.width = Math.abs(max[0] - min[0]);
         this.max = max;
         this.min = min;
         this.world = world;
@@ -75,5 +86,13 @@ public class Region
     public int getVolume()
     {
         return this.width * this.height * this.length;
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
     }
 }
