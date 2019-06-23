@@ -34,11 +34,10 @@ public class EventsHandler implements Listener
             Arena ar = this.plugin.getArenas().FindArena(player);
 
             e.setDropItems(false);
-            e.setCancelled(true);
 
-            if(MayBlockBreak(e.getBlock().getType(),ar, player))
+            if(!HandleBlockBreak(e.getBlock().getType(),ar, player))
             {
-                e.getBlock().setType(Material.AIR);
+                e.setCancelled(true);
             }
         }
     }
@@ -68,7 +67,7 @@ public class EventsHandler implements Listener
         }
     }
 
-    public boolean MayBlockBreak(Material mat, Arena ar, Player player)
+    public boolean HandleBlockBreak(Material mat, Arena ar, Player player)
     {
         if(mat == Material.DIAMOND_ORE)
         {
