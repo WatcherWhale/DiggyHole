@@ -226,31 +226,31 @@ public class Arena
     {
         double r = rand.nextDouble();
 
-        if(r <= diamond)
+        if(r <= chances.get(0))
         {
             return Material.DIAMOND_ORE;
         }
-        else if(r <= redstone)
+        else if(r <= chances.get(1))
         {
             return Material.REDSTONE_ORE;
         }
-        else if(r <= coal)
+        else if(r <= chances.get(2))
         {
             return Material.COAL_ORE;
         }
-        else if(r <= gold)
+        else if(r <= chances.get(3))
         {
             return Material.GOLD_ORE;
         }
-        else if(r <= emerald)
+        else if(r <= chances.get(4))
         {
             return Material.EMERALD_ORE;
         }
-        else if(r <= iron)
+        else if(r <= chances.get(5))
         {
             return Material.IRON_ORE;
         }
-        else if(r <= lapis)
+        else if(r <= chances.get(6))
         {
             return Material.LAPIS_ORE;
         }
