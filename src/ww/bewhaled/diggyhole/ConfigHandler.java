@@ -51,13 +51,13 @@ public class ConfigHandler
         config.set("EffectTime",500);
         config.set("WinPoints",10);
 
-        config.set("chance.diamond",1.0);
+        config.set("chance.diamondOffset",2.0);
         config.set("chance.coal",1.0);
-        config.set("chance.iron",1.0);
+        config.set("chance.iron",1.5);
         config.set("chance.gold",1.0);
-        config.set("chance.emerald",1.0);
-        config.set("chance.redstone",1.0);
-        config.set("chance.lapis",1.0);
+        config.set("chance.emerald",0.3);
+        config.set("chance.redstone",0.5);
+        config.set("chance.lapis",2.0);
     }
 
     public void SaveConfig()
