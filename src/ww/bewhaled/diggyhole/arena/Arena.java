@@ -129,6 +129,7 @@ public class Arena
     public void StartCountDown()
     {
         this.blockBuilt = false;
+        this.BuildWall();
 
         for(DHPlayer dhp : this.players.values())
         {
@@ -180,17 +181,11 @@ public class Arena
         Bukkit.getServer().getScheduler().cancelTask(this.taskID);
     }
 
-    public void Broadcast(String message)
-    {
-        for(DHPlayer player : players.values())
-        {
-            player.getPlayer().sendMessage(message);
-        }
-    }
-
     public void StartGame()
     {
-        started = true;
+        this.RemoveWall();
+        this.started = true;
+
 
         ItemStack pick = getPickaxe();
 
@@ -203,6 +198,27 @@ public class Arena
 
             //player.teleport(this.arena);
         }
+    }
+
+    public void FinishGame(Player winner)
+    {
+        for(DHPlayer player : this.players.values())
+        {
+            if(player.getPlayer() != winner)
+            {
+                player.getPlayer().sendMessage(ChatColor.RED + winner.getName() + ChatColor.GOLD + " Won the game");
+            }
+            else
+            {
+                player.getPlayer().sendMessage(ChatColor.GOLD + "You won the game");
+            }
+
+            player.RevertBack();
+            this.scoreboard.RemoveScoreBoard(player.getPlayer());
+        }
+
+        players.clear();
+        started = false;
     }
 
     private void BuildBlock()
@@ -235,6 +251,56 @@ public class Arena
         }
 
         this.blockBuilt = true;
+    }
+
+    private void BuildWall()
+    {
+        for (int x = region.getMin()[0] - 1; x <= region.getMax()[0] + 1;x++)
+        {
+            for (int z = region.getMin()[2] - 1; z <= region.getMax()[2] + 1;z++)
+            {
+                for (int y = region.getMin()[1]; y <= region.getMax()[1];y++)
+                {
+                    if(x == region.getMin()[0] - 1 || x == region.getMax()[0] + 1)
+                    {
+                        this.region.getWorld().getBlockAt(x,y,z).setType(Material.BARRIER);
+                    }
+                    else if(z == region.getMin()[2] - 1 || z == region.getMax()[2] + 1)
+                    {
+                        this.region.getWorld().getBlockAt(x,y,z).setType(Material.BARRIER);
+                    }
+                }
+            }
+        }
+    }
+
+    private void RemoveWall()
+    {
+        for (int x = region.getMin()[0] - 1; x <= region.getMax()[0] + 1;x++)
+        {
+            for (int z = region.getMin()[2] - 1; z <= region.getMax()[2] + 1;z++)
+            {
+                for (int y = region.getMin()[1]; y <= region.getMax()[1];y++)
+                {
+                    if(x == region.getMin()[0] - 1 || x == region.getMax()[0] + 1)
+                    {
+                        this.region.getWorld().getBlockAt(x,y,z).setType(Material.AIR);
+                    }
+                    else if(z == region.getMin()[2] - 1 || z == region.getMax()[2] + 1)
+                    {
+                        this.region.getWorld().getBlockAt(x,y,z).setType(Material.AIR);
+                    }
+                }
+            }
+        }
+    }
+
+    public void Broadcast(String message)
+    {
+        for(DHPlayer player : players.values())
+        {
+            player.getPlayer().sendMessage(message);
+        }
     }
 
     private Material RandomMaterial(Random rand)
@@ -296,27 +362,6 @@ public class Arena
         chances.add(emerald);
         chances.add(iron);
         chances.add(lapis);
-    }
-
-    public void FinishGame(Player winner)
-    {
-        for(DHPlayer player : this.players.values())
-        {
-            if(player.getPlayer() != winner)
-            {
-                player.getPlayer().sendMessage(ChatColor.RED + winner.getName() + ChatColor.GOLD + " Won the game");
-            }
-            else
-            {
-                player.getPlayer().sendMessage(ChatColor.GOLD + "You won the game");
-            }
-
-            player.RevertBack();
-            this.scoreboard.RemoveScoreBoard(player.getPlayer());
-        }
-
-        players.clear();
-        started = false;
     }
 
     public void ScorePoint(Player player)
