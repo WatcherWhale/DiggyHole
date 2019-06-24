@@ -46,7 +46,7 @@ diamonds occur. The chance that a diamond occurs is calculated
 as follows 
 `chance= (WinPoints * Players + offset)/(Volume of the arena)`
 
-* **chance.***: The chance(in %) the specified ore occurs.
+* **chance.***: The chance (in %) the specified ore occurs.
 
 ## Creating an Arena
 1. Make a selection with WorldEdit of how big your playable
