@@ -1,5 +1,6 @@
 package ww.bewhaled.diggyhole.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import ww.bewhaled.diggyhole.Main;
 import ww.bewhaled.diggyhole.arena.Arena;
@@ -17,7 +18,15 @@ public class LeaveCommand implements ICommand
     public void execute(Player player, String[] args)
     {
         Arena ar = this.plugin.getArenas().FindArena(player);
-        ar.PlayerLeft(player);
+        if(ar != null)
+        {
+            ar.PlayerLeft(player);
+        }
+        else
+        {
+            player.sendMessage(ChatColor.GREEN + "[Diggy Hole]" +
+                    ChatColor.RED + " You are not in a game!");
+        }
     }
 
     @Override
