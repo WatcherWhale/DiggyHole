@@ -128,7 +128,7 @@ public class Arena
 
     public void StartCountDown()
     {
-        this.BuildBlock();
+        this.blockBuilt = false;
 
         for(DHPlayer dhp : this.players.values())
         {
@@ -148,6 +148,11 @@ public class Arena
                     Broadcast(ChatColor.GOLD + "DIIIIGGG!!!");
                     StopCountDown(true);
                     StartGame();
+                }
+                else if(secondsLeft <= 5 && !blockBuilt)
+                {
+                    BuildBlock();
+                    started = true;
                 }
                 else if(secondsLeft%5 == 0 || secondsLeft <= 5)
                 {
