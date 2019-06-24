@@ -33,6 +33,9 @@ public class Arena
 
     private int taskID;
     private int secondsLeft;
+    private boolean blockBuilt;
+
+    private ArrayList<Double> chances;
 
     public Arena(Main pl, String name, Region region, Location lobby, Location arena)
     {
@@ -189,15 +192,17 @@ public class Arena
 
     private void BuildBlock()
     {
+        this.CalculateChances();
+
         Random rand = new Random();
         for (int x = region.getMin()[0]; x <= region.getMax()[0];x++)
         {
             for (int z = region.getMin()[2]; z <= region.getMax()[2];z++)
             {
-                for (int y = region.getMin()[1]; y <= region.getMax()[1];y++)
+                for (int y = region.getMin()[1]; y <= region.getMax()[1] + 1;y++)
                 {
                     //Set the top to grass blocks
-                    if(y == region.getMax()[1])
+                    if(y == region.getMax()[1] + 1)
                     {
                         this.region.world.getBlockAt(x,y,z).setType(Material.GRASS_BLOCK);
                     }
@@ -213,19 +218,13 @@ public class Arena
                 }
             }
         }
+
+        this.blockBuilt = true;
     }
 
     private Material RandomMaterial(Random rand)
     {
         double r = rand.nextDouble();
-
-        double diamond = this.plugin.getConfig().getDouble("chance.diamond")/100.0;
-        double redstone = this.plugin.getConfig().getDouble("chance.redstone")/100.0 + diamond;
-        double coal = this.plugin.getConfig().getDouble("chance.coal")/100.0 + redstone;
-        double gold = this.plugin.getConfig().getDouble("chance.gold")/100.0 + coal;
-        double emerald = this.plugin.getConfig().getDouble("chance.emerald")/100.0 + gold;
-        double iron = this.plugin.getConfig().getDouble("chance.iron")/100.0 + emerald;
-        double lapis = this.plugin.getConfig().getDouble("chance.lapis")/100.0 + iron;
 
         if(r <= diamond)
         {
@@ -257,6 +256,31 @@ public class Arena
         }
 
         return Material.STONE;
+    }
+
+    private void CalculateChances()
+    {
+        chances = new ArrayList<>();
+
+        int winPoints = this.plugin.getConfig().getInt("WinPoints");
+        int players = this.players.size();
+        int volume = this.region.getVolume();
+
+        double diamond = (winPoints*players + 2.0)/((double)volume);
+        double redstone = this.plugin.getConfig().getDouble("chance.redstone")/100.0 + diamond;
+        double coal = this.plugin.getConfig().getDouble("chance.coal")/100.0 + redstone;
+        double gold = this.plugin.getConfig().getDouble("chance.gold")/100.0 + coal;
+        double emerald = this.plugin.getConfig().getDouble("chance.emerald")/100.0 + gold;
+        double iron = this.plugin.getConfig().getDouble("chance.iron")/100.0 + emerald;
+        double lapis = this.plugin.getConfig().getDouble("chance.lapis")/100.0 + iron;
+
+        chances.add(diamond);
+        chances.add(redstone);
+        chances.add(coal);
+        chances.add(gold);
+        chances.add(emerald);
+        chances.add(iron);
+        chances.add(lapis);
     }
 
     public void FinishGame(Player winner)
