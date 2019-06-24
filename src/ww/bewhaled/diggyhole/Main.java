@@ -22,16 +22,7 @@ public class Main extends JavaPlugin
         this.we = (WorldEditPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
 
         //Load all configs
-        this.config = new ConfigHandler(this);
-        YamlConfiguration[] arConfigs = this.config.GetArenaConfigs();
-
-        //Load Arenas
-        this.arenas = new ArenaHandler(this);
-        for(YamlConfiguration config : arConfigs)
-        {
-            Arena ar = new Arena(this,config);
-            this.arenas.AddArena(ar);
-        }
+        this.LoadPlugin();
 
         //Register the commands
         this.getCommand("dh").setExecutor(new CommandHandler(this));
@@ -49,6 +40,26 @@ public class Main extends JavaPlugin
         for(Arena ar : this.arenas.getArenas())
         {
             this.config.SaveArena(ar);
+        }
+    }
+
+    //TODO: Kick everyone out of the arenas
+    public void ReloadPlugin()
+    {
+        LoadPlugin();
+    }
+
+    public void LoadPlugin()
+    {
+        this.config = new ConfigHandler(this);
+        YamlConfiguration[] arConfigs = this.config.GetArenaConfigs();
+
+        //Load Arenas
+        this.arenas = new ArenaHandler(this);
+        for(YamlConfiguration config : arConfigs)
+        {
+            Arena ar = new Arena(this,config);
+            this.arenas.AddArena(ar);
         }
     }
 

@@ -49,6 +49,7 @@ public class CommandHandler implements CommandExecutor
         this.commands.add(new CreateCommand(this.plugin));
         this.commands.add(new JoinCommand(this.plugin));
         this.commands.add(new SetCommand(this.plugin));
+        this.commands.add(new ReloadCommand(this.plugin));
     }
 
 }
