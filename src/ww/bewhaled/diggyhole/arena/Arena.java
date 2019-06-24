@@ -164,7 +164,7 @@ public class Arena
     {
         if(!safe)
         {
-            this.Broadcast(ChatColor.RED + "Countdown Cancelled!");
+            this.Broadcast(ChatColor.GREEN + "[Diggy Hole]" + ChatColor.RED + "Countdown Cancelled!");
 
             for(DHPlayer player : this.players.values())
             {
