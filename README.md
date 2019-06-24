@@ -67,11 +67,12 @@ Now you created an arena.
 
 ## Commands & Permissions
 
-| Command                             | Description                  | Permission         |
-| ----------------------------------- | ---------------------------- | ------------------ |
-| `/dh help`                          | Get a list of all commands.  | `diggyhole.player` |
-| `/dh join <arena name>`             | Join the specified arena.    | `diggyhole.player` |
-| `/dh leave`                         | Leave the game.              | `diggyhole.player` |
-| `/dh create <arena name>`           | Create an arena.             | `diggyhole.admin`  |
-| `/dh set <arena name> <lobby/arena>`| Set a special location.      | `diggyhole.admin`  |
-| `/dh reload`                        | Reload all the config files. | `diggyhole.admin`  |
+| Command                             | Description                    | Permission         |
+| ----------------------------------- | ------------------------------ | ------------------ |
+| `/dh help`                          | Get a list of all commands.    | `diggyhole.player` |
+| `/dh join <arena name>`             | Join the specified arena.      | `diggyhole.player` |
+| `/dh leave`                         | Leave the game.                | `diggyhole.player` |
+| `/dh create <arena name>`           | Create an arena.               | `diggyhole.admin`  |
+| `/dh set <arena name> <lobby/arena>`| Set a special location.        | `diggyhole.admin`  |
+| `/dh region <arena name>`           | Change the region of an arena. | `diggyhole.admin`  |
+| `/dh reload`                        | Reload all the config files.   | `diggyhole.admin`  |
