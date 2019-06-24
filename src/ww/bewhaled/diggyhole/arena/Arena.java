@@ -135,7 +135,18 @@ public class Arena
 
         if(this.players.size() < this.plugin.getConfig().getInt("MinPlayers"))
         {
-            StopCountDown(false);
+            if(!this.started)
+            {
+                StopCountDown(false);
+            }
+            else if(this.players.size() == 1)
+            {
+                FinishGame((Player)this.players.values().toArray()[0]);
+            }
+            else if(this.players.size() == 0)
+            {
+                FinishGame(null);
+            }
         }
     }
 
@@ -215,23 +226,26 @@ public class Arena
 
     public void FinishGame(Player winner)
     {
-        for(DHPlayer player : this.players.values())
+        if(winner != null)
         {
-            if(player.getPlayer() != winner)
+            for (DHPlayer player : this.players.values())
             {
-                player.getPlayer().sendMessage(ChatColor.RED + winner.getName() + ChatColor.GOLD + " Won the game");
+                if (player.getPlayer() != winner)
+                {
+                    player.getPlayer().sendMessage(ChatColor.RED + winner.getName() + ChatColor.GOLD + " Won the game");
+                }
+                else
+                {
+                    player.getPlayer().sendMessage(ChatColor.GOLD + "You won the game");
+                }
+    
+                player.RevertBack();
+                this.scoreboard.RemoveScoreBoard(player.getPlayer());
             }
-            else
-            {
-                player.getPlayer().sendMessage(ChatColor.GOLD + "You won the game");
-            }
-
-            player.RevertBack();
-            this.scoreboard.RemoveScoreBoard(player.getPlayer());
         }
-
-        players.clear();
-        started = false;
+    
+        this.players.clear();
+        this.started = false;
     }
 
     //endregion
@@ -496,7 +510,8 @@ public class Arena
         return name;
     }
 
-    public Region getRegion() {
+    public Region getRegion()
+    {
         return region;
     }
 
