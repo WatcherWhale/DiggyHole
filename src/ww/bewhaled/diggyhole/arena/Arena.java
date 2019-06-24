@@ -233,10 +233,15 @@ public class Arena
                 if (player.getPlayer() != winner)
                 {
                     player.getPlayer().sendMessage(ChatColor.RED + winner.getName() + ChatColor.GOLD + " Won the game");
+                    
+                    player.getPlayer().sendTitle(ChatColor.DARK_RED + "You lost the game!",
+                            ChatColor.DARK_PURPLE + winner.getName() + " won!",10,50,10);
                 }
                 else
                 {
                     player.getPlayer().sendMessage(ChatColor.GOLD + "You won the game");
+                    player.getPlayer().sendTitle(ChatColor.GOLD + "You won the game!",
+                            ChatColor.DARK_PURPLE + "Congratulations",10,50,10);
                 }
     
                 player.RevertBack();
