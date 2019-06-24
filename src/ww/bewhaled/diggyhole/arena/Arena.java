@@ -37,6 +37,8 @@ public class Arena
 
     private ArrayList<Double> chances;
 
+    //region Constructors
+
     public Arena(Main pl, String name, Region region, Location lobby, Location arena)
     {
         this.plugin = pl;
@@ -86,6 +88,10 @@ public class Arena
 
         this.scoreboard = new ScoreBoardHandler(pl,this);
     }
+
+    //endregion
+
+    //region Game Handling
 
     public void PlayerJoined(Player player)
     {
@@ -221,6 +227,10 @@ public class Arena
         started = false;
     }
 
+    //endregion
+
+    //region Build
+
     private void BuildBlock()
     {
         this.CalculateChances();
@@ -295,14 +305,6 @@ public class Arena
         }
     }
 
-    public void Broadcast(String message)
-    {
-        for(DHPlayer player : players.values())
-        {
-            player.getPlayer().sendMessage(message);
-        }
-    }
-
     private Material RandomMaterial(Random rand)
     {
         double r = rand.nextDouble();
@@ -363,6 +365,10 @@ public class Arena
         chances.add(iron);
         chances.add(lapis);
     }
+
+    //endregion
+
+    //region Effects
 
     public void ScorePoint(Player player)
     {
@@ -430,6 +436,16 @@ public class Arena
         player.addPotionEffect(effect);
     }
 
+    //endregion
+
+    public void Broadcast(String message)
+    {
+        for(DHPlayer player : players.values())
+        {
+            player.getPlayer().sendMessage(message);
+        }
+    }
+
     public void PreparePlayer(Player player)
     {
         player.setGameMode(GameMode.SURVIVAL);
@@ -440,10 +456,7 @@ public class Arena
         player.addPotionEffect(effect);
     }
 
-    public DHPlayer FindPlayer(Player player)
-    {
-        return this.players.get(player.getName());
-    }
+    //region Getters and Setters
 
     public ItemStack getPickaxe()
     {
@@ -463,6 +476,11 @@ public class Arena
         pick.setItemMeta(meta);
 
         return pick;
+    }
+
+    public DHPlayer FindPlayer(Player player)
+    {
+        return this.players.get(player.getName());
     }
 
     public String getName() {
@@ -504,4 +522,6 @@ public class Arena
     public void setArena(Location arena) {
         this.arena = arena;
     }
+
+    //endregion
 }
