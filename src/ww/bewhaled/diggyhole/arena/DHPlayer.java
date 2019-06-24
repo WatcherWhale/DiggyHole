@@ -3,10 +3,8 @@ package ww.bewhaled.diggyhole.arena;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-
-import java.util.Collection;
 
 public class DHPlayer
 {
@@ -58,31 +56,59 @@ public class DHPlayer
 
 class DHPlayerSave
 {
-    private PlayerInventory inv;
-    private Collection<PotionEffect> effects;
     private GameMode gameMode;
     private Location location;
+    
+    private ItemStack[] contents;
+    private ItemStack[] armor;
+    private float exp;
+    
+    private double[] health;
+    private int food;
+    private PotionEffect[] effects;
 
     public DHPlayerSave(Player player)
     {
-        this.inv = player.getInventory();
-        this.effects = player.getActivePotionEffects();
+        this.contents = player.getInventory().getContents();
+        this.armor = player.getInventory().getArmorContents();
+        
+        this.effects = player.getActivePotionEffects().toArray(new PotionEffect[]{});
         this.gameMode = player.getGameMode();
         this.location = player.getLocation();
+        
+        this.exp = player.getLevel() + player.getExp();
+        
+        this.health = new double[] {player.getHealth(),player.getHealthScale()};
+        this.food = player.getFoodLevel();
+        
     }
 
     public void LoadSave(Player player)
     {
         this.RemoveEffects(player);
-
+        
         //Restore the player save state
-        player.getInventory().setContents(this.inv.getContents());
-        player.getInventory().setArmorContents(this.inv.getArmorContents());
-        player.getInventory().setItemInOffHand(this.inv.getItemInOffHand());
+        player.getInventory().setContents(this.contents);
+        player.getInventory().setArmorContents(this.armor);
+        player.updateInventory();
 
         player.teleport(this.location);
         player.setGameMode(this.gameMode);
-        player.addPotionEffects(this.effects);
+        
+        for(PotionEffect pe : this.effects)
+        {
+            player.addPotionEffect(pe);
+        }
+        
+        int levels = Math.round(this.exp);
+        player.setLevel(levels);
+        player.setExp(this.exp - levels);
+        
+        player.setHealth(this.health[0]);
+        player.setHealthScale(this.health[1]);
+        
+        player.setFoodLevel(this.food);
+        
     }
 
     public void RemoveEffects(Player player)
