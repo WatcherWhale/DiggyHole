@@ -46,10 +46,15 @@ public class Main extends JavaPlugin
     //TODO: Kick everyone out of the arenas
     public void ReloadPlugin()
     {
+        for(Arena ar : this.arenas.getArenas())
+        {
+            ar.FinishGame(null);
+        }
+        
         LoadPlugin();
     }
 
-    public void LoadPlugin()
+    private void LoadPlugin()
     {
         this.config = new ConfigHandler(this);
         YamlConfiguration[] arConfigs = this.config.GetArenaConfigs();
