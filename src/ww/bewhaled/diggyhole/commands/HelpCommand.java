@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class HelpCommand implements ICommand
 {
-    Main plugin;
-    ArrayList<ICommand> commands;
+    private Main plugin;
+    private ArrayList<ICommand> commands;
 
     public HelpCommand(Main pl, ArrayList<ICommand> commands)
     {

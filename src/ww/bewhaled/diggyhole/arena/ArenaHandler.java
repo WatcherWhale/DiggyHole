@@ -3,7 +3,6 @@ package ww.bewhaled.diggyhole.arena;
 import org.bukkit.entity.Player;
 import ww.bewhaled.diggyhole.Main;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class ConfigHandler
 {
-    Main plugin;
-    File file;
+    private Main plugin;
+    private File file;
 
     public ConfigHandler(Main pl)
     {

@@ -150,7 +150,7 @@ public class Arena
         }
     }
 
-    public void StartCountDown()
+    private void StartCountDown()
     {
         this.blockBuilt = false;
         this.BuildWall();
@@ -190,7 +190,7 @@ public class Arena
 
     }
 
-    public void StopCountDown(boolean safe)
+    private void StopCountDown(boolean safe)
     {
         if(!safe)
         {
@@ -205,7 +205,7 @@ public class Arena
         Bukkit.getServer().getScheduler().cancelTask(this.taskID);
     }
 
-    public void StartGame()
+    private void StartGame()
     {
         this.RemoveWall();
         this.started = true;
@@ -243,6 +243,13 @@ public class Arena
                 this.scoreboard.RemoveScoreBoard(player.getPlayer());
             }
         }
+        else
+        {
+            for (DHPlayer player : this.players.values())
+            {
+                player.RevertBack();
+            }
+        }
     
         this.players.clear();
         this.started = false;
@@ -266,16 +273,16 @@ public class Arena
                     //Set the top to grass blocks
                     if(y == region.getMax()[1] + 1)
                     {
-                        this.region.world.getBlockAt(x,y,z).setType(Material.GRASS_BLOCK);
+                        this.region.getWorld().getBlockAt(x,y,z).setType(Material.GRASS_BLOCK);
                     }
                     else if(x == region.getMax()[0] || x == region.getMin()[0] ||
                             z == region.getMax()[2] || z == region.getMin()[2])
                     {
-                        this.region.world.getBlockAt(x,y,z).setType(Material.STONE);
+                        this.region.getWorld().getBlockAt(x,y,z).setType(Material.STONE);
                     }
                     else
                     {
-                        this.region.world.getBlockAt(x,y,z).setType(this.RandomMaterial(rand));
+                        this.region.getWorld().getBlockAt(x,y,z).setType(this.RandomMaterial(rand));
                     }
                 }
             }
@@ -461,7 +468,7 @@ public class Arena
 
     //endregion
 
-    public void Broadcast(String message)
+    private void Broadcast(String message)
     {
         for(DHPlayer player : players.values())
         {
@@ -469,7 +476,7 @@ public class Arena
         }
     }
 
-    public void PreparePlayer(Player player)
+    private void PreparePlayer(Player player)
     {
         player.setGameMode(GameMode.SURVIVAL);
         player.getInventory().clear();
@@ -481,7 +488,7 @@ public class Arena
 
     //region Getters and Setters
 
-    public ItemStack getPickaxe()
+    private ItemStack getPickaxe()
     {
         ItemStack pick = new ItemStack(Material.DIAMOND_PICKAXE,1);
 

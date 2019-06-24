@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class CommandHandler implements CommandExecutor
 {
-    Main plugin;
-    ArrayList<ICommand> commands;
+    private Main plugin;
+    private ArrayList<ICommand> commands;
 
     public CommandHandler(Main pl)
     {
@@ -43,7 +43,7 @@ public class CommandHandler implements CommandExecutor
         return true;
     }
 
-    public void InitCommands()
+    private void InitCommands()
     {
         this.commands.add(new HelpCommand(this.plugin,this.commands));
         this.commands.add(new JoinCommand(this.plugin));

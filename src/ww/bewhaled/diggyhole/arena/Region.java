@@ -4,9 +4,9 @@ import org.bukkit.World;
 
 public class Region
 {
-    int[] max,min;
-    int height, width, length;
-    World world;
+    private int[] max,min;
+    private int height, width, length;
+    private World world;
 
     public Region(com.sk89q.worldedit.regions.Region region, World world)
     {
