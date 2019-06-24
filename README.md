@@ -1,4 +1,5 @@
-# DiggyHole
+<img src="https://github.com/WatcherWhale/DiggyHole/blob/master/assets/Banner.png?raw=true" alt="" height="200" />
+
 ## Installation
 1. Install WorldEdit to your server
 2. Download the `DiggyHole.jar` file and place it in 
