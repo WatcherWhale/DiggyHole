@@ -95,6 +95,13 @@ public class Arena
 
     public void PlayerJoined(Player player)
     {
+        if(this.started)
+        {
+            player.sendMessage(ChatColor.GREEN + "[Diggy Hole]" +
+                    ChatColor.RED + " Game already started!");
+            return;
+        }
+
         DHPlayer dhp = new DHPlayer(player,this.name);
         players.put(player.getName(),dhp);
 
