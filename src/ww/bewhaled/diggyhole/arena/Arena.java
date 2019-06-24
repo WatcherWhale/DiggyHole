@@ -297,6 +297,7 @@ public class Arena
             }
 
             player.RevertBack();
+            this.scoreboard.RemoveScoreBoard(player.getPlayer());
         }
 
         players.clear();
