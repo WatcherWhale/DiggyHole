@@ -119,6 +119,11 @@ public class Arena
 
         player.sendMessage(ChatColor.GREEN + "[Diggy Hole]" +
                 ChatColor.WHITE + " You left the game!");
+
+        if(this.players.size() < this.plugin.getConfig().getInt("MinPlayers"))
+        {
+            StopCountDown(false);
+        }
     }
 
     public void StartCountDown()
@@ -160,6 +165,11 @@ public class Arena
         if(!safe)
         {
             this.Broadcast(ChatColor.RED + "Countdown Cancelled!");
+
+            for(DHPlayer player : this.players.values())
+            {
+                player.getPlayer().teleport(this.lobby);
+            }
         }
 
         Bukkit.getServer().getScheduler().cancelTask(this.taskID);
