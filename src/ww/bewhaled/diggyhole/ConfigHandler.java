@@ -46,10 +46,10 @@ public class ConfigHandler
     {
         FileConfiguration config = this.plugin.getConfig();
     
-        if(config.isSet("MinPlayers"))  config.set("MinPlayers",4);
-        if(config.isSet("Countdown"))   config.set("Countdown",15);
-        if(config.isSet("EffectTime"))  config.set("EffectTime",500);
-        if(config.isSet("WinPoints"))   config.set("WinPoints",10);
+        if(!config.isSet("MinPlayers")) config.set("MinPlayers",4);
+        if(!config.isSet("Countdown"))  config.set("Countdown",15);
+        if(!config.isSet("EffectTime")) config.set("EffectTime",500);
+        if(!config.isSet("WinPoints"))  config.set("WinPoints",10);
 
         if(!config.isSet("chance.diamondMultiplier")) config.set("chance.diamondMultiplier",2.0);
         if(!config.isSet("chance.chance.coal")) config.set("chance.coal",1.0);
