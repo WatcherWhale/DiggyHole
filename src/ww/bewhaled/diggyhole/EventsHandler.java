@@ -98,6 +98,10 @@ public class EventsHandler implements Listener
         {
             ar.Slow(player);
         }
+        else if(mat == Material.MAGMA_BLOCK)
+        {
+            ar.BackEffect(player);
+        }
         else if(mat == Material.STONE)
         {
             //Count blocks in the future

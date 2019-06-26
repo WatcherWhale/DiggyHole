@@ -389,6 +389,10 @@ public class Arena
         {
             return Material.LAPIS_ORE;
         }
+        else if(r <= chances.get(7))
+        {
+            return Material.MAGMA_BLOCK;
+        }
 
         return Material.STONE;
     }
@@ -412,6 +416,7 @@ public class Arena
         double emerald = this.plugin.getConfig().getDouble("chance.emerald")/100.0 + gold;
         double iron = this.plugin.getConfig().getDouble("chance.iron")/100.0 + emerald;
         double lapis = this.plugin.getConfig().getDouble("chance.lapis")/100.0 + iron;
+        double magma = this.plugin.getConfig().getDouble("chance.magma")/100.0 + lapis;
 
         chances.add(diamond);
         chances.add(redstone);
@@ -420,6 +425,7 @@ public class Arena
         chances.add(emerald);
         chances.add(iron);
         chances.add(lapis);
+        chances.add(magma);
     }
 
     //endregion
@@ -444,9 +450,16 @@ public class Arena
 
     public void Speed(Player player)
     {
-        PotionEffect effect = new PotionEffect(PotionEffectType.SPEED,this.plugin.getConfig().getInt("EffectTime"),
-                                        5,true,false);
-        player.addPotionEffect(effect);
+        if(player.hasPotionEffect(PotionEffectType.SLOW))
+        {
+            player.removePotionEffect(PotionEffectType.SLOW);
+        }
+        else
+        {
+            PotionEffect effect = new PotionEffect(PotionEffectType.SPEED, this.plugin.getConfig().getInt("EffectTime"),
+                    5, true, false);
+            player.addPotionEffect(effect);
+        }
     }
 
     public void Slow(Player player)
@@ -457,6 +470,9 @@ public class Arena
                 5,true,false);
         player.addPotionEffect(effect1);
         player.addPotionEffect(effect2);
+        
+        player.removePotionEffect(PotionEffectType.SPEED);
+        player.removePotionEffect(PotionEffectType.FAST_DIGGING);
     }
 
     public void Blind(Player player)
@@ -487,11 +503,23 @@ public class Arena
 
     public void FastMining(Player player)
     {
-        PotionEffect effect = new PotionEffect(PotionEffectType.FAST_DIGGING,this.plugin.getConfig().getInt("EffectTime"),
-                5,true,false);
-        player.addPotionEffect(effect);
+        if(player.hasPotionEffect(PotionEffectType.SLOW_DIGGING))
+        {
+            player.removePotionEffect(PotionEffectType.SLOW_DIGGING);
+        }
+        else
+        {
+            PotionEffect effect = new PotionEffect(PotionEffectType.FAST_DIGGING, this.plugin.getConfig().getInt("EffectTime"),
+                    5, true, false);
+            player.addPotionEffect(effect);
+        }
     }
-
+    
+    public void BackEffect(Player player)
+    {
+        player.teleport(this.arena);
+    }
+    
     //endregion
 
     private void Broadcast(String message)
