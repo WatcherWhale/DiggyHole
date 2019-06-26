@@ -384,7 +384,7 @@ public class Arena
 
         double dOffset = this.plugin.getConfig().getDouble("chance.diamondOffset");
 
-        double diamond = (winPoints*players + dOffset)/((double)volume);
+        double diamond = (winPoints*players*dOffset)/((double)volume);
         double redstone = this.plugin.getConfig().getDouble("chance.redstone")/100.0 + diamond;
         double coal = this.plugin.getConfig().getDouble("chance.coal")/100.0 + redstone;
         double gold = this.plugin.getConfig().getDouble("chance.gold")/100.0 + coal;
