@@ -45,19 +45,20 @@ public class ConfigHandler
     public void SetDefaults()
     {
         FileConfiguration config = this.plugin.getConfig();
+    
+        if(config.isSet("MinPlayers"))  config.set("MinPlayers",4);
+        if(config.isSet("Countdown"))   config.set("Countdown",15);
+        if(config.isSet("EffectTime"))  config.set("EffectTime",500);
+        if(config.isSet("WinPoints"))   config.set("WinPoints",10);
 
-        config.set("MinPlayers",4);
-        config.set("Countdown",15);
-        config.set("EffectTime",500);
-        config.set("WinPoints",10);
-
-        config.set("chance.diamondOffset",2.0);
-        config.set("chance.coal",1.0);
-        config.set("chance.iron",1.5);
-        config.set("chance.gold",1.0);
-        config.set("chance.emerald",0.3);
-        config.set("chance.redstone",0.5);
-        config.set("chance.lapis",2.0);
+        if(!config.isSet("chance.diamondMultiplier")) config.set("chance.diamondMultiplier",2.0);
+        if(!config.isSet("chance.chance.coal")) config.set("chance.coal",1.0);
+        if(!config.isSet("chance.iron"))        config.set("chance.iron",1.5);
+        if(!config.isSet("chance.gold"))        config.set("chance.gold",1.0);
+        if(!config.isSet("chance.emerald"))     config.set("chance.emerald",0.3);
+        if(!config.isSet("chance.redstone"))    config.set("chance.redstone",0.5);
+        if(!config.isSet("chance.lapis"))       config.set("chance.lapis",2.0);
+        if(!config.isSet("chance.magma"))       config.set("chance.magma",0.3);
     }
 
     public void SaveConfig()
