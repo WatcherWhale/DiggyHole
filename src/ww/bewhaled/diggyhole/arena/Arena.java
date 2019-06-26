@@ -226,6 +226,8 @@ public class Arena
 
     public void FinishGame(Player winner)
     {
+        this.ShowOres();
+        
         if(winner != null)
         {
             for (DHPlayer player : this.players.values())
@@ -330,6 +332,23 @@ public class Arena
                         this.region.getWorld().getBlockAt(x,y,z).setType(Material.AIR);
                     }
                     else if(z == region.getMin()[2] - 1 || z == region.getMax()[2] + 1)
+                    {
+                        this.region.getWorld().getBlockAt(x,y,z).setType(Material.AIR);
+                    }
+                }
+            }
+        }
+    }
+    
+    private void ShowOres()
+    {
+        for (int x = region.getMin()[0]; x <= region.getMax()[0];x++)
+        {
+            for (int z = region.getMin()[2]; z <= region.getMax()[2]; z++)
+            {
+                for (int y = region.getMin()[1]; y <= region.getMax()[1] + 1; y++)
+                {
+                    if(this.region.getWorld().getBlockAt(x,y,z).getType() == Material.STONE)
                     {
                         this.region.getWorld().getBlockAt(x,y,z).setType(Material.AIR);
                     }
