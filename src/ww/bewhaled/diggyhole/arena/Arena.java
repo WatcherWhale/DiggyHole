@@ -226,6 +226,7 @@ public class Arena
 
     public void FinishGame(Player winner)
     {
+        this.started = false;
         this.ShowOres();
         
         if(winner != null)
@@ -259,7 +260,6 @@ public class Arena
         }
     
         this.players.clear();
-        this.started = false;
     }
 
     //endregion
