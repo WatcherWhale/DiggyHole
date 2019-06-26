@@ -1,4 +1,4 @@
-<img src="https://github.com/WatcherWhale/DiggyHole/blob/master/assets/Banner.png?raw=true" alt="" height="200" />
+# <img src="assets/Banner.png" alt="" height="150" />
 
 ## Installation
 1. Install WorldEdit to your server
