@@ -27,6 +27,7 @@ chance:
   emerald: 0.3
   redstone: 0.5
   lapis: 2.0
+  magma: 0.3
 ```
 
 * **MinPlayers**: The minimum amount of players
@@ -42,10 +43,10 @@ a PotionEffect lasts.
 * **WinPoints**: The amount of points a player needs to score
 to win the game.
 
-* **chance.diamondOffset**: This number increases the chance
+* **chance.diamondMultiplier**: This number increases the chance
 diamonds occur. The chance that a diamond occurs is calculated
 as follows 
-`chance= (WinPoints * Players + offset)/(Volume of the arena)`
+`chance= WinPoints * (Players * multiplier + stabilizer)/(Volume of the arena)`
 
 * **chance.***: The chance (in %) the specified ore occurs.
 
