@@ -1,5 +1,5 @@
 name: DiggyHole
-version: 0.2.3
+version: 1.0.0
 author: WatcherWhale
 main: ww.bewhaled.diggyhole.Main
 depends: [WorldEdit]
