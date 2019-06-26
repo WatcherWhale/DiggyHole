@@ -9,6 +9,8 @@ import ww.bewhaled.diggyhole.Main;
 import ww.bewhaled.diggyhole.arena.Arena;
 import ww.bewhaled.diggyhole.arena.Region;
 
+import java.util.ArrayList;
+
 public class RegionCommand implements ICommand
 {
     private Main plugin;
@@ -50,7 +52,15 @@ public class RegionCommand implements ICommand
                     ChatColor.RED + " The arena " + args[1] + " does not exist!");
         }
     }
-
+    
+    public ArrayList<String> getCompletions(int arg)
+    {
+        if(arg == 1)
+            return new ArrayList<>(this.plugin.getArenas().getArenaNames());
+        else
+            return new ArrayList<>();
+    }
+    
     @Override
     public boolean hasPermission(Player player)
     {

@@ -5,6 +5,8 @@ import org.bukkit.entity.Player;
 import ww.bewhaled.diggyhole.Main;
 import ww.bewhaled.diggyhole.arena.Arena;
 
+import java.util.ArrayList;
+
 public class SetCommand implements ICommand
 {
     private Main plugin;
@@ -49,7 +51,24 @@ public class SetCommand implements ICommand
                     ChatColor.RED + " The arena " + args[1] + " does not exist!");
         }
     }
-
+    
+    public ArrayList<String> getCompletions(int arg)
+    {
+        if(arg == 1)
+            return new ArrayList<>(this.plugin.getArenas().getArenaNames());
+        else if(arg == 2)
+        {
+            ArrayList<String> completions = new ArrayList<>();
+            completions.add("lobby");
+            completions.add("arena");
+            return completions;
+        }
+        else
+        {
+            return new ArrayList<>();
+        }
+    }
+    
     @Override
     public boolean hasPermission(Player player)
     {

@@ -8,6 +8,8 @@ import org.bukkit.entity.Player;
 import ww.bewhaled.diggyhole.Main;
 import ww.bewhaled.diggyhole.arena.Arena;
 
+import java.util.ArrayList;
+
 public class CreateCommand implements ICommand
 {
     private Main plugin;
@@ -39,6 +41,11 @@ public class CreateCommand implements ICommand
         }
     }
 
+    public ArrayList<String> getCompletions(int arg)
+    {
+        return new ArrayList<>();
+    }
+    
     @Override
     public boolean hasPermission(Player player)
     {

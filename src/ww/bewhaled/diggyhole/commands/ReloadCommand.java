@@ -4,6 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import ww.bewhaled.diggyhole.Main;
 
+import java.util.ArrayList;
+
 public class ReloadCommand implements ICommand
 {
     private Main plugin;
@@ -19,6 +21,11 @@ public class ReloadCommand implements ICommand
         this.plugin.ReloadPlugin();
         player.sendMessage(ChatColor.GREEN + "[Diggy Hole]" +
                 ChatColor.WHITE + " Successfully reloaded the configuration files!");
+    }
+    
+    public ArrayList<String> getCompletions(int arg)
+    {
+        return new ArrayList<>();
     }
 
     @Override

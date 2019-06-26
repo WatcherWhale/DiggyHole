@@ -70,4 +70,9 @@ public class ArenaHandler
     {
         return this.arenas.values();
     }
+    
+    public Collection<String> getArenaNames()
+    {
+        return this.arenas.keySet();
+    }
 }

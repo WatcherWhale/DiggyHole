@@ -5,6 +5,8 @@ import org.bukkit.entity.Player;
 import ww.bewhaled.diggyhole.Main;
 import ww.bewhaled.diggyhole.arena.Arena;
 
+import java.util.ArrayList;
+
 public class LeaveCommand implements ICommand
 {
     private Main plugin;
@@ -28,7 +30,12 @@ public class LeaveCommand implements ICommand
                     ChatColor.RED + " You are not in a game!");
         }
     }
-
+    
+    public ArrayList<String> getCompletions(int arg)
+    {
+        return new ArrayList<>();
+    }
+    
     @Override
     public boolean hasPermission(Player player)
     {

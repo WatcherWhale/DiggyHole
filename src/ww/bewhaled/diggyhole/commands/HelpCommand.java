@@ -30,7 +30,12 @@ public class HelpCommand implements ICommand
             }
         }
     }
-
+    
+    public ArrayList<String> getCompletions(int arg)
+    {
+        return new ArrayList<>();
+    }
+    
     @Override
     public boolean hasPermission(Player player)
     {

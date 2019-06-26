@@ -1,9 +1,12 @@
 package ww.bewhaled.diggyhole.commands;
 
+import com.mysql.fabric.xmlrpc.base.Array;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import ww.bewhaled.diggyhole.Main;
 import ww.bewhaled.diggyhole.arena.Arena;
+
+import java.util.ArrayList;
 
 public class JoinCommand implements ICommand
 {
@@ -35,7 +38,15 @@ public class JoinCommand implements ICommand
 
         ar.PlayerJoined(player);
     }
-
+    
+    public ArrayList<String> getCompletions(int arg)
+    {
+        if(arg == 1)
+            return new ArrayList<>(this.plugin.getArenas().getArenaNames());
+        else
+            return new ArrayList<>();
+    }
+    
     @Override
     public boolean hasPermission(Player player)
     {
