@@ -108,7 +108,7 @@ public class Arena
         this.scoreboard.SetScoreBoard(player);
         this.scoreboard.SetScore(player,dhp.getPoints());
 
-        player.teleport(this.arena);
+        player.teleport(this.lobby);
 
         player.sendMessage(ChatColor.GREEN + "[Diggy Hole]" +
                 ChatColor.WHITE + " Joined " + this.name + "!");
@@ -487,7 +487,7 @@ public class Arena
         player.getInventory().clear();
 
         PotionEffect effect = new PotionEffect(PotionEffectType.NIGHT_VISION,Integer.MAX_VALUE,
-                255,true,false);
+            255,true,false);
         player.addPotionEffect(effect);
     }
 
