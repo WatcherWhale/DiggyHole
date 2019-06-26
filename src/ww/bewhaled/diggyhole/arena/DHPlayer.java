@@ -100,7 +100,7 @@ class DHPlayerSave
             player.addPotionEffect(pe);
         }
         
-        int levels = Math.round(this.exp);
+        int levels = (int)Math.floor(this.exp);
         player.setLevel(levels);
         player.setExp(this.exp - levels);
         
