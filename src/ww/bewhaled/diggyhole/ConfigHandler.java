@@ -28,13 +28,14 @@ public class ConfigHandler
                 //Create the file
                 this.file.createNewFile();
                 this.plugin.getConfig().load(this.file);
-                this.SetDefaults();
-                this.SaveConfig();
             }
             else
             {
                 this.plugin.getConfig().load(this.file);
             }
+    
+            this.SetDefaults();
+            this.SaveConfig();
         }
         catch(Exception e)
         {
